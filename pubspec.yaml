@@ -48,6 +48,9 @@ flutter:
     - assets/images/flags/flag_nigeria.png
     - assets/images/flags/flag_united_kingdom.png
     - assets/images/lingo_logo.png
+    - assets/images/offline_avatar.jpg
+    - assets/images/plant_doodle.png
+    - assets/images/check_good.png
   fonts:
     - family: DM Serif Display
       fonts:

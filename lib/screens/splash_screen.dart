@@ -12,9 +12,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    // Timer starts counting once the app starts...
     Timer(Duration(seconds: 8), () => {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OnBoardingScreen()))
     });
+    // TODO Implement a user auth system to bypass the splash screen to main activity.
   }
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           Expanded(
             child: Container(
-                width: 175.0,
+                width: 178.0,
                 child: Image.asset(lingo_logo)
             ),
             flex: 3,
@@ -36,10 +38,10 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
               children: <Widget>[
                 SizedBox(
-                  height: 20.0,
+                  height: 40.0,
                 ),
                SizedBox(
-                 width: 210.0,
+                 width: 230.0,
                  child: LinearProgressIndicator(
                    value: null,
                    backgroundColor: Colors.transparent,
