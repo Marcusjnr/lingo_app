@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "921626879500",
+    "firebase_url": "https://lingo-62098.firebaseio.com",
+    "project_id": "lingo-62098",
+    "storage_bucket": "lingo-62098.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:921626879500:android:4791453f5f365da1533029",
+        "android_client_info": {
+          "package_name": "com.mezuec.lingo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "921626879500-89nmer7p148qrsimp6a4vvt5925eoa5v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDaeh5Gmc9sXXbymxcVzyHvTQMONJ4zSk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "921626879500-89nmer7p148qrsimp6a4vvt5925eoa5v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

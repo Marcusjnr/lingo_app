@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:lingo_app/styles/styles.dart';
 
 class LanguageSelector extends StatelessWidget {
-  String _languageCountryAsset, _languageCountry;
+  String languageCountryAsset, languageCountry;
+
+  LanguageSelector({this.languageCountry, this.languageCountryAsset});
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +22,14 @@ class LanguageSelector extends StatelessWidget {
             height: 30.0,
             width: 30.0,
             child: CircleAvatar(
-              child: Image.asset(flag_uk),
+              child: Image.asset(languageCountryAsset),
               radius: 20,
             ),
           ),
           SizedBox(
             width: 8.0,
           ),
-          Text("English", style: bodyOneTextBold,),
+          Text(languageCountry, style: bodyOneTextBold,),
           SizedBox(
             height: 12.0,
           ),

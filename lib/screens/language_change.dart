@@ -1,47 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:lingo_app/localization/demolocalization.dart';
+import '../main.dart';
 import 'file:///C:/Users/mezuestudios/Documents/flutterProjects/lingo_app/lib/widgets/language_change_list_item.dart';
 import 'package:lingo_app/models/language_change_list_model.dart';
+import 'package:lingo_app/providers/language_change_provider.dart';
+import 'package:lingo_app/screens/language_picker.dart';
 import 'file:///C:/Users/mezuestudios/Documents/flutterProjects/lingo_app/lib/widgets/list_item.dart';
 import 'package:lingo_app/styles/styles.dart';
+import 'package:provider/provider.dart';
 
 class LanguageChange extends StatefulWidget {
+  LanguageChange({Key key}) : super(key: key);
   @override
   _LanguageChangeState createState() => _LanguageChangeState();
 }
 
 class _LanguageChangeState extends State<LanguageChange> {
-  List<LanguageChangeListModel> languageList = [];
+  List<LanguageChangeListModel> languageListing = new List<LanguageChangeListModel>();
+  String _languagename;
   GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
-  String _language_name;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    languageList.add(LanguageChangeListModel(
-      'Asusu Igbo',
-      'Nigeria',
-      flag_nigeria,
-    ));
-    languageList.add(LanguageChangeListModel(
-      'English',
-      'United Kingdom',
-      flag_uk,
-    ));
-    languageList.add(LanguageChangeListModel(
-      'Hausa',
-      'Nigeria',
-      flag_nigeria,
-    ));
-    languageList.add(LanguageChangeListModel(
-      'Yourba',
-      'Nigeria',
-      flag_nigeria,
-    ));
+
 
   }
   @override
   Widget build(BuildContext context) {
+    languageListing = languageList(context);
+    Locale _temp = Locale("en", "UK");
     return Scaffold(
       backgroundColor: primaryColor,
       appBar: AppBar(
@@ -68,7 +57,7 @@ class _LanguageChangeState extends State<LanguageChange> {
                     cursorColor: primaryColor,
                     maxLines: 1,
                     decoration: InputDecoration(
-                      labelText: name_placeholder,
+                      labelText: search_placeholder,
                       errorMaxLines: 1,
                       fillColor: Colors.white,
                       border: InputBorder.none,
@@ -87,28 +76,44 @@ class _LanguageChangeState extends State<LanguageChange> {
                       return null;
                     },
                     onSaved: (String input) {
-                      _language_name = input;
+                      _languagename = input;
                     },
 
                   ),
                 ),
                 SizedBox(
-                  height: 15.0,
+                  height: 30.0,
                 ),
                 Expanded(child: ListView.separated(
-                    itemCount: 5,
+                    itemCount: languageListing.length,
                     separatorBuilder: (context, index) => SizedBox(height: 14.0,),
                     itemBuilder: (context, index){
                       return  LanguageChangeListItem(
-                        title: languageList[index].title,
-                        subTitle: languageList[index].subTitle,
-                        flag: languageList[index].flagImage,
+                        title: languageListing[index].title,
+                        subTitle: languageListing[index].subTitle,
+                        flag: languageListing[index].flagImage,
                         onPressed: (){
-                          print(languageList[index]);
+                         Provider.of<LanguageChangeProvider>(context, listen: false).updateLanguage(languageListing[index].title, languageListing[index].flagImage);
+                         if(languageListing[index].languageCode == "ig"){
+                           // print("Igbo");
+                           _temp = Locale("ig", "NG");
+                         }else if(languageListing[index].languageCode == "en"){
+                           _temp = Locale("en", "UK");
+                         }else if(languageListing[index].languageCode == "ha"){
+                           _temp = Locale("ha", "NG");
+                         }else if(languageListing[index].languageCode == "yo"){
+                           _temp = Locale("yo", "NG");
+                         }
+
+                         print(_temp);
+                         MyApp.setLocale(context, _temp);
+                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LanguagePicker()));
+
                         },);
                     }
                 ),
-                  flex: 2,)
+                  flex: 2,),
+
               ]
           ),
         ),

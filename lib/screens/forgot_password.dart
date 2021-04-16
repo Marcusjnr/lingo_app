@@ -1,8 +1,11 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:lingo_app/localization/local_constant.dart';
 import 'package:lingo_app/screens/sign_up_screen.dart';
 import 'package:lingo_app/styles/styles.dart';
 
 class ForgotPassword extends StatefulWidget {
+  ForgotPassword({Key key}) : super(key: key);
   @override
   _ForgotPasswordState createState() => _ForgotPasswordState();
 }
@@ -28,7 +31,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Center(
-                  child: Text(forgot_password,
+                  child: Text(getTranslated(context, 'forgot_password'),
                     textAlign: TextAlign.center,
                     style: headlineText,
                   ),
@@ -37,7 +40,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   height: 14.0,
                 ),
                 Center(
-                  child: Text("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi. ",
+                  child: Text(getTranslated(context, 'forgot_password_subtitle'),
                     textAlign: TextAlign.center,
                     style: bodyOneText,
                   ),
@@ -56,18 +59,20 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     cursorColor: primaryColor,
                     maxLines: 1,
                     decoration: InputDecoration(
-                      labelText: username_placeholder,
+                      labelText: _emailAddress,
                       errorMaxLines: 1,
                       fillColor: Colors.white,
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(2.0),
                       enabled: true,
-                      hintText: email_placeholder,
+                      hintText: getTranslated(context, 'email_placeholder'),
                       hintMaxLines: 1,
                     ),
                     validator: (String input){
                       if(input.isEmpty) {
-                        return "Please enter your $email_placeholder";
+                        return getTranslated(context, 'validation_email');
+                      }else if(!EmailValidator.validate(input)){
+                        return getTranslated(context, 'validation_email_2');
                       }
                       return null;
                     },
@@ -84,14 +89,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   height: 5.0,
                 ),
                 TextButton(
-                  child: Text(forgot_password, style: buttonText),
+                  child: Text(getTranslated(context, 'forgot_password'), style: buttonTextalt,),
                   style: TextButton.styleFrom(
                       padding: EdgeInsets.only(top: 18.0, bottom: 18.0),
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: textColor,
                       onSurface: Colors.white,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(14.0)))
                   ),
-                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen())),
+                  //onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen())),
                 ),
 
 

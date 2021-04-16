@@ -4,11 +4,14 @@ import 'file:///C:/Users/mezuestudios/Documents/flutterProjects/lingo_app/lib/wi
 import 'package:lingo_app/styles/styles.dart';
 
 class ChallengesPage extends StatefulWidget {
+  ChallengesPage({Key key}) : super(key: key);
   @override
   _ChallengesPageState createState() => _ChallengesPageState();
 }
 
 class _ChallengesPageState extends State<ChallengesPage> {
+  String _languageName = "English";
+  String _languageFlag = flag_uk;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +33,10 @@ class _ChallengesPageState extends State<ChallengesPage> {
                       ),
                       Expanded(child: SizedBox( height: 30.0,), flex: 1,),
                       Container(
-                        child: LanguageSelector(),
+                        child: LanguageSelector(
+                          languageCountry: _languageName,
+                          languageCountryAsset: _languageFlag,
+                        ),
                         height: 44.0,
                       ),
                     ],

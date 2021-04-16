@@ -37,7 +37,7 @@ class _ChallengeListItemState extends State<ChallengeListItem> {
                     onSurface: Colors.white,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(60.0)))
                 ),
-                onPressed: () => print("Hellow"),
+                onPressed: () => print("Hello"),
                     //Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword())),
               ),
             ],

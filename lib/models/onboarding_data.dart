@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:lingo_app/localization/local_constant.dart';
 import 'package:lingo_app/styles/styles.dart';
 
 class OnboardingData{
@@ -26,28 +28,28 @@ class OnboardingData{
 
 }
 
-List<OnboardingData> getOnBoardingList(){
+List<OnboardingData> getOnBoardingList(BuildContext context){
   List<OnboardingData> OnboardingSlides = new List<OnboardingData>();
   OnboardingData onboardingData = new OnboardingData();
   //Slide 1
-  onboardingData.setTitle(sliderTitle1);
-  onboardingData.setDesc(sliderDesc1);
+  onboardingData.setTitle(getTranslated(context, 'slider_title_1'));
+  onboardingData.setDesc(getTranslated(context, 'slider_subtitle_1'));
   onboardingData.setImage(sliderImage1);
   OnboardingSlides.add(onboardingData);
 
   onboardingData = new OnboardingData();
 
   //Slide 2
-  onboardingData.setTitle(sliderTitle2);
-  onboardingData.setDesc(sliderDesc2);
+  onboardingData.setTitle(getTranslated(context, 'slider_title_2'));
+  onboardingData.setDesc(getTranslated(context, 'slider_subtitle_2'));
   onboardingData.setImage(sliderImage2);
   OnboardingSlides.add(onboardingData);
 
   onboardingData = new OnboardingData();
 
   //Slide 3
-  onboardingData.setTitle(sliderTitle3);
-  onboardingData.setDesc(sliderDesc3);
+  onboardingData.setTitle(getTranslated(context, 'slider_title_3'));
+  onboardingData.setDesc(getTranslated(context, 'slider_subtitle_3'));
   onboardingData.setImage(sliderImage3);
   OnboardingSlides.add(onboardingData);
 

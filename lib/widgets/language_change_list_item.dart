@@ -17,7 +17,9 @@ class LanguageChangeListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onPressed,
+      onTap: () {
+        onPressed();
+      },
       child: Container(
           padding: EdgeInsets.only(left: 12.0, right: 12.0, top:14.0, bottom: 12.0),
           decoration: BoxDecoration(

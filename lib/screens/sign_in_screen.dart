@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:lingo_app/localization/local_constant.dart';
 import 'package:lingo_app/screens/forgot_password.dart';
 import 'package:lingo_app/screens/sign_up_screen.dart';
 import 'package:lingo_app/styles/styles.dart';
 
 import 'home.dart';
 class SignInScreen extends StatefulWidget {
+  SignInScreen({Key key}) : super(key: key);
   @override
   _SignInScreenState createState() => _SignInScreenState();
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   String _username;
   String _password;
   @override
@@ -31,7 +34,7 @@ class _SignInScreenState extends State<SignInScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Center(
-                  child: Text(sign_in,
+                  child: Text(getTranslated(context, 'sign_in'),
                     textAlign: TextAlign.center,
                     style: headlineText,
                   ),
@@ -40,7 +43,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: 14.0,
                 ),
                 Center(
-                  child: Text("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi. ",
+                  child: Text(getTranslated(context, 'sign_in_subtitle'),
                     textAlign: TextAlign.center,
                     style: bodyOneText,
                   ),
@@ -60,8 +63,8 @@ class _SignInScreenState extends State<SignInScreen> {
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(14.0)))
                           ),
                           onPressed: () => print("Facebook"),
-                          icon: Icon(Icons.face_outlined, color: Colors.white,),
-                          label: Text(fb_sign,style: buttonTextalt,)),
+                          icon: Image.asset(facebook, height: 24.0, width: 24.0,),
+                          label: Text(getTranslated(context, 'fb_sign'),style: buttonTextalt,)),
                     ),
                     SizedBox(
                       width: 14.0,
@@ -75,9 +78,9 @@ class _SignInScreenState extends State<SignInScreen> {
                               onSurface: Colors.white,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(14.0)))
                           ),
-                          onPressed: () => print("Facebook"),
-                          icon: Icon(Icons.face_outlined, color: Colors.white,),
-                          label: Text(tw_sign,style: buttonTextalt,)),
+                          onPressed: () => print("Twitter"),
+                          icon: Image.asset(twitter, height: 24.0, width: 24.0,),
+                          label: Text(getTranslated(context, 'tw_sign'),style: buttonTextalt,)),
                     ),
                   ],
                 ),
@@ -100,7 +103,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     SizedBox(
                       width: 5.0,
                     ),
-                    Text("or", style: dividerText,),
+                    Text(getTranslated(context, 'or_placeholder'), style: dividerText,),
                     SizedBox(
                       width: 5.0,
                     ),
@@ -120,6 +123,11 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(
                   height: 18.0,
                 ),
+          Form(
+            key: _globalKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
                 Container(
                   padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 5.0, bottom: 5.0),
                   decoration: BoxDecoration(
@@ -131,18 +139,18 @@ class _SignInScreenState extends State<SignInScreen> {
                     cursorColor: primaryColor,
                     maxLines: 1,
                     decoration: InputDecoration(
-                      labelText: username_placeholder,
+                      labelText: getTranslated(context, 'username_placeholder'),
                       errorMaxLines: 1,
                       fillColor: Colors.white,
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(2.0),
                       enabled: true,
-                      hintText: username_placeholder,
+                      hintText: getTranslated(context, 'username_placeholder'),
                       hintMaxLines: 1,
                     ),
                     validator: (String input){
                       if(input.isEmpty) {
-                        return "Please enter your $username_placeholder";
+                        return getTranslated(context, 'validation_username');
                       }
                       return null;
                     },
@@ -165,20 +173,20 @@ class _SignInScreenState extends State<SignInScreen> {
                     cursorColor: primaryColor,
                     maxLines: 1,
                     decoration: InputDecoration(
-                      labelText: password_placeholder,
+                      labelText: getTranslated(context, 'password_placeholder'),
                       errorMaxLines: 1,
                       fillColor: Colors.white,
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(2.0),
                       enabled: true,
-                      hintText: password_placeholder,
+                      hintText: getTranslated(context, 'password_placeholder'),
                       hintMaxLines: 1,
                     ),
                     validator: (String input){
                       if(input.length > 16){
-                        return "Please character limit is 16";
+                        return getTranslated(context, 'password_character_limit');
                       }else if(input.isEmpty) {
-                        return "Please enter your $password_placeholder";
+                        return getTranslated(context, 'validation_password');
                       }
                       return null;
                     },
@@ -192,7 +200,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: 5.0,
                 ),
                 TextButton(
-                  child: Text(forgot_password, style: buttonText),
+                  child: Text(getTranslated(context, 'forgot_password'), style: buttonText),
                   style: TextButton.styleFrom(
                       padding: EdgeInsets.only(top: 18.0, bottom: 18.0),
                       backgroundColor: Colors.transparent,
@@ -205,7 +213,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: 5.0,
                 ),
                 TextButton(
-                  child: Text(sign_in, style: buttonTextalt,),
+                  child: Text(getTranslated(context, 'sign_in'), style: buttonTextalt,),
                   style: TextButton.styleFrom(
                       padding: EdgeInsets.only(top: 18.0, bottom: 18.0),
                       backgroundColor: textColor,
@@ -216,6 +224,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ],
             ),
+          )
+              ],
+          )
           ),
         )
     );
