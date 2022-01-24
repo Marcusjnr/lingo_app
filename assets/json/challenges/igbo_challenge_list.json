@@ -1,0 +1,14 @@
+{
+	"igbo_challenge_list":[
+	{
+		"id":"challenges_1_number",
+		"title": "Number's game 1",
+		"difficulty": "Easy"
+	},
+	{
+		"id":"challenges_2_food",
+		"title": "Food Challenge",
+		"difficulty": "Easy"
+	}
+	]
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lingo_app/localization/local_constant.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:lingo_app/styles/styles.dart';
+import 'package:lingo_app/translations/locale_keys.g.dart';
 
 class LanguageChangeListModel{
   String title;
@@ -39,35 +40,23 @@ class LanguageChangeListModel{
 }
 
 List<LanguageChangeListModel> languageList(BuildContext context){
-  List<LanguageChangeListModel> languageListing = new List<LanguageChangeListModel>();
+  List<LanguageChangeListModel> languageListing = [];
 
   LanguageChangeListModel languageListModel = new LanguageChangeListModel();
-  languageListModel.setTitle(getTranslated(context, 'lang_ig'));
-  languageListModel.setsubTitle(getTranslated(context, 'lang_ng'));
-  languageListModel.setImage(flag_nigeria);
-  languageListModel.setLanguageCode('ig');
-  languageListing.add(languageListModel);
-  languageListModel = new LanguageChangeListModel();
 
 
-  languageListModel.setTitle(getTranslated(context, 'lang_en'));
-  languageListModel.setsubTitle(getTranslated(context, 'lang_en_country'));
+  languageListModel.setTitle(LocaleKeys.lang_en.tr());
+  languageListModel.setsubTitle(LocaleKeys.lang_en_country.tr());
   languageListModel.setImage(flag_uk);
   languageListModel.setLanguageCode('en');
   languageListing.add(languageListModel);
   languageListModel = new LanguageChangeListModel();
 
-  languageListModel.setTitle(getTranslated(context, 'lang_ha'));
-  languageListModel.setsubTitle(getTranslated(context, 'lang_ng'));
-  languageListModel.setImage(flag_nigeria);
-  languageListModel.setLanguageCode('ha');
-  languageListing.add(languageListModel);
-  languageListModel = new LanguageChangeListModel();
 
-  languageListModel.setTitle(getTranslated(context, 'lang_yo'));
-  languageListModel.setsubTitle(getTranslated(context, 'lang_ng'));
-  languageListModel.setImage(flag_nigeria);
-  languageListModel.setLanguageCode('yo');
+  languageListModel.setTitle(LocaleKeys.lang_fr.tr());
+  languageListModel.setsubTitle(LocaleKeys.lang_fr_country.tr());
+  languageListModel.setImage(flag_france);
+  languageListModel.setLanguageCode('fr');
   languageListing.add(languageListModel);
   languageListModel = new LanguageChangeListModel();
 

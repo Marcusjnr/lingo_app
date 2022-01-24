@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:lingo_app/localization/local_constant.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:lingo_app/screens/challenges_page.dart';
 import 'package:lingo_app/screens/learn_page.dart';
 import 'package:lingo_app/screens/profile_page.dart';
-import 'package:lingo_app/styles/styles.dart';
+import 'package:lingo_app/translations/locale_keys.g.dart';
 
 class HomeScreen extends StatefulWidget {
+  static String id = 'home-screen';
   HomeScreen({Key key}) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -40,15 +41,15 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: switcher,
         items: [
           BottomNavigationBarItem(
-            label: getTranslated(context, 'home_title'),
+            label: LocaleKeys.home_title.tr(),
             icon: Icon(Icons.home),
           ),
           BottomNavigationBarItem(
-            label: getTranslated(context, 'challenge_title'),
+            label: LocaleKeys.challenge_title.tr(),
             icon: Icon(Icons.videogame_asset_rounded),
           ),
           BottomNavigationBarItem(
-            label: getTranslated(context, 'profile_title'),
+            label: LocaleKeys.profile_title.tr(),
             icon: Icon(Icons.person),
           )
         ],

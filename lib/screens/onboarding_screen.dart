@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:lingo_app/localization/local_constant.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:lingo_app/models/onboarding_data.dart';
 import 'package:lingo_app/screens/sign_in_screen.dart';
 import 'package:lingo_app/styles/styles.dart';
+import 'package:lingo_app/translations/locale_keys.g.dart';
 import 'package:lingo_app/widgets/onboarding_item.dart';
 import 'language_picker.dart';
 
 class OnBoardingScreen extends StatefulWidget {
+  static String id = 'on-boarding-screen';
   OnBoardingScreen({Key key}) : super(key: key);
   @override
   _OnBoardingScreenState createState() => _OnBoardingScreenState();
@@ -45,7 +47,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 child: PageView.builder(
                   itemCount: slider.length,
                   itemBuilder: (context, index) =>
-                      OnBoardingItem( slider[index].getTitle(), slider[index].getDesc(), slider[index].getImage()
+                      OnBoardingItem(
+                          slider[index].getTitle(),
+                          slider[index].getDesc(),
+                          slider[index].getImage()
                       ),
                   controller: _pageController,
                   pageSnapping: true,
@@ -71,18 +76,18 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ),
 
             TextButton(
-              child: Text(getTranslated(context, 'get_started'), style: buttonTextalt,),
+              child: Text(LocaleKeys.get_started.tr(), style: buttonTextalt,),
               style: TextButton.styleFrom(
                   padding: EdgeInsets.only(top: 18.0, bottom: 18.0),
                   backgroundColor: textColor,
                   onSurface: Colors.white,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(14.0)))
               ),
-              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => LanguagePicker())),
+              onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LanguagePicker())),
             ),
             SizedBox(height: 20.0,),
             OutlinedButton(
-              child: Text(getTranslated(context, 'sign_in'), style: buttonText,),
+              child: Text(LocaleKeys.sign_in.tr(), style: buttonText,),
               style: OutlinedButton.styleFrom(
                 padding: EdgeInsets.only(top: 18.0, bottom: 18.0),
                 textStyle: buttonText,
@@ -92,7 +97,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(14.0))),
               ),
 
-              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SignInScreen())),
+              onPressed: () => Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => SignInScreen())),
             ),
             SizedBox(height: 20.0,),
           ],

@@ -1,0 +1,11 @@
+{
+	"learning_3_foods": [
+{ 		"question_id": "food_1",
+		"question_type": "image-text",
+		"image":"image-link"
+		"title": "Obi dị m mma izute gị",
+		"subtitle": "I'm pleased to meet you",
+		"answer": "audio-link",
+},
+]
+}

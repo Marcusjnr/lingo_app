@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lingo_app/localization/demolocalization.dart';
-import 'package:lingo_app/localization/local_constant.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:lingo_app/screens/onboarding_screen.dart';
+import 'package:lingo_app/translations/locale_keys.g.dart';
 import 'package:lingo_app/widgets/language_list_item.dart';
 import 'package:lingo_app/models/language_list_model.dart';
 import 'package:lingo_app/providers/language_change_provider.dart';
@@ -8,17 +9,17 @@ import 'package:lingo_app/widgets/language_selector.dart';
 import 'package:lingo_app/screens/sign_up_screen.dart';
 import 'package:lingo_app/styles/styles.dart';
 import 'package:provider/provider.dart';
-import 'language_change.dart';
+import 'package:lingo_app/screens/language_change.dart';
 class LanguagePicker extends StatefulWidget {
+  static String id = 'language-picker-screen';
   LanguagePicker({Key key}) : super(key: key);
   @override
   _LanguagePickerState createState() => _LanguagePickerState();
 }
 
 class _LanguagePickerState extends State<LanguagePicker> {
-  List<LanguageListModel> languageListing = new List<LanguageListModel>();
-  String _languageName = "English";
-  String _languageFlag = flag_uk;
+  List<LanguageListModel> languageListing = [];
+  String selectedLanguage;
 
   @override
   void initState() {
@@ -34,7 +35,8 @@ class _LanguagePickerState extends State<LanguagePicker> {
         automaticallyImplyLeading: true,
         backgroundColor: Colors.transparent,
         leading: IconButton(icon: Icon(Icons.arrow_back_ios_rounded,color: textColor,),
-          onPressed: () => Navigator.pop(context),),
+          onPressed: () => Navigator.pushReplacementNamed(context, OnBoardingScreen.id),
+        ),
         elevation: 0.0,
       ),
       body: Container(
@@ -44,7 +46,7 @@ class _LanguagePickerState extends State<LanguagePicker> {
         child: Column(
             children: [
               Center(
-                child: Text(getTranslated(context, 'picker_i_speak'),
+                child: Text(LocaleKeys.picker_i_speak.tr(),
                   textAlign: TextAlign.center,
                   style: cardTitleText,
                 ),
@@ -54,7 +56,9 @@ class _LanguagePickerState extends State<LanguagePicker> {
                 height: 20.0,),
 
               GestureDetector(
-                  onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LanguageChange())),
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LanguageChange())),
                   child: LanguageSelector(
                     languageCountry: Provider.of<LanguageChangeProvider>(context, listen: false).languageName,
                     languageCountryAsset: Provider.of<LanguageChangeProvider>(context, listen: false).languageFlag,
@@ -63,7 +67,7 @@ class _LanguagePickerState extends State<LanguagePicker> {
               SizedBox(
                 height: 20.0,),
               Center(
-                child: Text(getTranslated(context, 'picker_i_want'),
+                child: Text(LocaleKeys.picker_i_want.tr(),
                   textAlign: TextAlign.center,
                   style: cardTitleText,
                 ),
@@ -71,7 +75,6 @@ class _LanguagePickerState extends State<LanguagePicker> {
 
               SizedBox(
                 height: 20.0,),
-
               Expanded(
                   flex: 2,
                   child: ListView.separated(
@@ -82,8 +85,7 @@ class _LanguagePickerState extends State<LanguagePicker> {
                           title: languageListing[index].title,
                           subTitle: languageListing[index].subTitle,
                           avatar: languageListing[index].flagImage,
-                          checkBoxWidget: languageListing[index].isChecked
-                              ?
+                          checkBoxWidget: languageListing[index].isChecked ?
                           Container(
                             height: 34,
                             width: 34,
@@ -94,7 +96,6 @@ class _LanguagePickerState extends State<LanguagePicker> {
                                 )
                             ),
                           )
-
                               :
                           Container(
                             height: 34,
@@ -105,8 +106,18 @@ class _LanguagePickerState extends State<LanguagePicker> {
                             ),
                           ),
                           onPressed: (){
+                            //languageListing[index].isChecked = !languageListing[index].isChecked;
                             setState(() {
-                              languageListing[index].isChecked = !languageListing[index].isChecked;
+                              if(languageListing[index].isChecked = false){
+                                languageListing[index].isChecked = true;
+
+                                print(languageListing[index].isChecked);
+                              }else if(languageListing[index].isChecked = true){
+                                languageListing[index].isChecked = false;
+                              }
+
+                              print(languageListing[index].isChecked);
+
                             });
 
                           },
@@ -117,7 +128,7 @@ class _LanguagePickerState extends State<LanguagePicker> {
 
               GestureDetector(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
+                  Navigator.pushReplacementNamed(context, SignUpScreen.id);
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width,
@@ -127,8 +138,7 @@ class _LanguagePickerState extends State<LanguagePicker> {
                       borderRadius: BorderRadius.circular(14.0)
                   ),
                   child: Center(
-                    child: Text(
-                      getTranslated(context, 'continue_text'),
+                    child: Text(LocaleKeys.continue_text.tr(),
                       style: buttonTextalt,
                     ),
                   ),

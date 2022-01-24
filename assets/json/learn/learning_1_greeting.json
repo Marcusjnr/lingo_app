@@ -1,0 +1,73 @@
+{
+"learning_1_greeting": [
+
+	{ 	"question_id": "greeting_1",
+		"question_type": "text",
+		"title": "Nnọọ",
+		"subtitle": "Welcome",
+		"answer": "audio-link"
+	},
+	
+	{ 	"question_id": "greeting_2",
+		"question_type": "text",
+		"title": "Utụtụ ọma",
+		"subtitle": "Good morning",
+		"answer": "audio-link"
+	},
+	
+	{ 	"question_id": "greeting_3",
+		"question_type": "text",
+		"title": "Kedụ ka ị dị?",
+		"subtitle": "How are you?",
+		"answer": "audio-link"
+	},
+	
+	{ 	"question_id": "greeting_4",
+		"question_type": "text",
+		"title": "Kedụ ka ị dị?",
+		"subtitle": "I'm fine, thanks and you?",
+		"answer": "audio-link"
+	},
+	
+	{ 	"question_id": "greeting_5",
+		"question_type": "text",
+		"title": "I meela maka enyemaka gị",
+		"subtitle": "Thank you for your help",
+		"answer": "audio-link"
+	},
+	
+	{ 	"question_id": "greeting_6",
+		"question_type": "text",
+		"title": "Aha m bụ____",
+		"subtitle": "My name is____",
+		"answer": "audio-link"
+	},
+	
+	{ 	"question_id": "greeting_7",
+		"question_type": "text",
+		"title": "Obi dị m mma izute gị",
+		"subtitle": "I'm pleased to meet you",
+		"answer": "audio-link"
+	},
+	{ 	"question_id": "greeting_8",
+		"question_type": "text",
+		"title": "Heloo",
+		"subtitle": "Hello",
+		"answer": "audio-link"
+	},
+	
+	{ 	"question_id": "greeting_9",
+		"question_type": "text",
+		"title": "Mgbasa ọma",
+		"subtitle": "Good bye",
+		"answer": "audio-link"
+	},
+	
+	{ 	"question_id": "greeting_10",
+		"question_type": "text",
+		"title": "Abalị ọma",
+		"subtitle": "Good night",
+		"answer": "audio-link"
+	}
+	]
+}

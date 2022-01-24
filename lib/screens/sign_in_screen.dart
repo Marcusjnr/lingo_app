@@ -1,11 +1,17 @@
+import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:lingo_app/localization/local_constant.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:lingo_app/screens/forgot_password.dart';
-import 'package:lingo_app/screens/sign_up_screen.dart';
+import 'package:lingo_app/screens/onboarding_screen.dart';
+import 'package:lingo_app/services/auth_services.dart';
 import 'package:lingo_app/styles/styles.dart';
+import 'package:lingo_app/translations/locale_keys.g.dart';
 
 import 'home.dart';
+
 class SignInScreen extends StatefulWidget {
+  static String id = 'sign-in-screen';
   SignInScreen({Key key}) : super(key: key);
   @override
   _SignInScreenState createState() => _SignInScreenState();
@@ -13,7 +19,8 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
-  String _username;
+  final _auth = FirebaseAuth.instance;
+  String _email;
   String _password;
   @override
   Widget build(BuildContext context) {
@@ -22,8 +29,10 @@ class _SignInScreenState extends State<SignInScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: true,
           backgroundColor: Colors.transparent,
-          leading: IconButton(icon: Icon(Icons.arrow_back_ios_rounded,color: textColor,),
-            onPressed: () => Navigator.pop(context),),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_rounded,color: textColor,),
+            onPressed: () => Navigator.pop(context),
+          ),
           elevation: 0.0,
         ),
         body: Container(
@@ -34,7 +43,7 @@ class _SignInScreenState extends State<SignInScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Center(
-                  child: Text(getTranslated(context, 'sign_in'),
+                  child: Text(LocaleKeys.sign_in.tr(),
                     textAlign: TextAlign.center,
                     style: headlineText,
                   ),
@@ -43,83 +52,13 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: 14.0,
                 ),
                 Center(
-                  child: Text(getTranslated(context, 'sign_in_subtitle'),
+                  child: Text(LocaleKeys.sign_in_subtitle.tr(),
                     textAlign: TextAlign.center,
                     style: bodyOneText,
                   ),
                 ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: TextButton.icon(
-                          style: TextButton.styleFrom(
-                              padding: EdgeInsets.only(top: 14.0, bottom: 14.0),
-                              backgroundColor: fbColor,
-                              onSurface: Colors.white,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(14.0)))
-                          ),
-                          onPressed: () => print("Facebook"),
-                          icon: Image.asset(facebook, height: 24.0, width: 24.0,),
-                          label: Text(getTranslated(context, 'fb_sign'),style: buttonTextalt,)),
-                    ),
-                    SizedBox(
-                      width: 14.0,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: TextButton.icon(
-                          style: TextButton.styleFrom(
-                              padding: EdgeInsets.only(top: 14.0, bottom: 14.0),
-                              backgroundColor: twColor,
-                              onSurface: Colors.white,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(14.0)))
-                          ),
-                          onPressed: () => print("Twitter"),
-                          icon: Image.asset(twitter, height: 24.0, width: 24.0,),
-                          label: Text(getTranslated(context, 'tw_sign'),style: buttonTextalt,)),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 18.0,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Opacity(
-                        opacity: 0.4,
-                        child: Container(
-                          height: 1.0,
-                          width: 120.0,
-                          color: textColor,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 5.0,
-                    ),
-                    Text(getTranslated(context, 'or_placeholder'), style: dividerText,),
-                    SizedBox(
-                      width: 5.0,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Opacity(
-                          opacity: 0.4,
-                          child: Container(
-                            height: 1.0,
-                            width: 120.0,
-                            color: textColor,
-                          )
-                      ),
-                    ),
-                  ],
-                ),
+
+
                 SizedBox(
                   height: 18.0,
                 ),
@@ -135,28 +74,31 @@ class _SignInScreenState extends State<SignInScreen> {
                       borderRadius: BorderRadius.circular(14.0)
                   ),
                   child: TextFormField(
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.emailAddress,
                     cursorColor: primaryColor,
                     maxLines: 1,
                     decoration: InputDecoration(
-                      labelText: getTranslated(context, 'username_placeholder'),
+                      labelText: LocaleKeys.email_placeholder.tr(),
                       errorMaxLines: 1,
                       fillColor: Colors.white,
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(2.0),
                       enabled: true,
-                      hintText: getTranslated(context, 'username_placeholder'),
+                      hintText: LocaleKeys.email_placeholder.tr(),
                       hintMaxLines: 1,
                     ),
                     validator: (String input){
                       if(input.isEmpty) {
-                        return getTranslated(context, 'validation_username');
+                        return LocaleKeys.validation_email.tr();
+                      }else if(!EmailValidator.validate(input)){
+                        return LocaleKeys.validation_email_2.tr();
                       }
                       return null;
                     },
                     onSaved: (String input) {
-                      _username = input;
+                      _email = input;
                     },
+
                   ),
                 ),
                 SizedBox(
@@ -173,20 +115,20 @@ class _SignInScreenState extends State<SignInScreen> {
                     cursorColor: primaryColor,
                     maxLines: 1,
                     decoration: InputDecoration(
-                      labelText: getTranslated(context, 'password_placeholder'),
+                      labelText: LocaleKeys.password_placeholder.tr(),
                       errorMaxLines: 1,
                       fillColor: Colors.white,
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(2.0),
                       enabled: true,
-                      hintText: getTranslated(context, 'password_placeholder'),
+                      hintText: LocaleKeys.password_placeholder.tr(),
                       hintMaxLines: 1,
                     ),
                     validator: (String input){
                       if(input.length > 16){
-                        return getTranslated(context, 'password_character_limit');
+                        return LocaleKeys.password_character_limit.tr();
                       }else if(input.isEmpty) {
-                        return getTranslated(context, 'validation_password');
+                        return LocaleKeys.validation_password.tr();
                       }
                       return null;
                     },
@@ -200,27 +142,27 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: 5.0,
                 ),
                 TextButton(
-                  child: Text(getTranslated(context, 'forgot_password'), style: buttonText),
+                  child: Text(LocaleKeys.forgot_password.tr(), style: buttonText),
                   style: TextButton.styleFrom(
                       padding: EdgeInsets.only(top: 18.0, bottom: 18.0),
                       backgroundColor: Colors.transparent,
                       onSurface: Colors.white,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(14.0)))
                   ),
-                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword())),
+                  onPressed: () => Navigator.pushNamed(context, ForgotPassword.id),
                 ),
                 SizedBox(
                   height: 5.0,
                 ),
                 TextButton(
-                  child: Text(getTranslated(context, 'sign_in'), style: buttonTextalt,),
+                  child: Text(LocaleKeys.sign_in.tr(), style: buttonTextalt,),
                   style: TextButton.styleFrom(
                       padding: EdgeInsets.only(top: 18.0, bottom: 18.0),
                       backgroundColor: textColor,
                       onSurface: Colors.white,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(14.0)))
                   ),
-                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen())),
+                  onPressed: () => _confirmUser(),
                 ),
               ],
             ),
@@ -230,5 +172,13 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
         )
     );
+  }
+
+  _confirmUser() {
+    if(_globalKey.currentState.validate()){
+      _globalKey.currentState.save();
+      AuthService.signInUser(context, _email, _password);
+     // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lingo_app/localization/local_constant.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:lingo_app/styles/styles.dart';
+import 'package:lingo_app/translations/locale_keys.g.dart';
 
 class LanguageListModel{
 
@@ -40,30 +41,16 @@ class LanguageListModel{
 }
 
 List<LanguageListModel> languageList(BuildContext context){
-  List<LanguageListModel> languageListing = new List<LanguageListModel>();
+  List<LanguageListModel> languageListing = [];
 
-  LanguageListModel languageListModel = new LanguageListModel();
-  languageListModel.setTitle(getTranslated(context, 'lang_ig'));
-  languageListModel.setsubTitle(getTranslated(context, 'lang_ng'));
-  languageListModel.setImage(flag_nigeria);
+  LanguageListModel languageListModel = LanguageListModel();
+  languageListModel.setTitle(LocaleKeys.lang_fr.tr());
+  languageListModel.setsubTitle(LocaleKeys.lang_fr.tr());
+  languageListModel.setImage(flag_france);
   languageListModel.setCheck(false);
   languageListing.add(languageListModel);
-  languageListModel = new LanguageListModel();
+  languageListModel = LanguageListModel();
 
-
-  languageListModel.setTitle(getTranslated(context, 'lang_ha'));
-  languageListModel.setsubTitle(getTranslated(context, 'lang_ng'));
-  languageListModel.setImage(flag_nigeria);
-  languageListModel.setCheck(false);
-  languageListing.add(languageListModel);
-  languageListModel = new LanguageListModel();
-
-  languageListModel.setTitle(getTranslated(context, 'lang_yo'));
-  languageListModel.setsubTitle(getTranslated(context, 'lang_ng'));
-  languageListModel.setImage(flag_nigeria);
-  languageListModel.setCheck(false);
-  languageListing.add(languageListModel);
-  languageListModel = new LanguageListModel();
 
   return languageListing;
 

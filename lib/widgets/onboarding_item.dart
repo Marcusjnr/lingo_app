@@ -29,7 +29,7 @@ class OnBoardingItem extends StatelessWidget {
           SizedBox(
             height: 20.0,
           ),
-          Image.asset(image, height: MediaQuery.of(context).size.height/2,),
+          Image.asset(image, height: MediaQuery.of(context).size.height/2.3,),
         ],
       ),
     );

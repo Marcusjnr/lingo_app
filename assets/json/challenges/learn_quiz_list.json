@@ -1,0 +1,34 @@
+{
+"learn_quiz_list":	[
+		{
+			"id": "learning_1_greeting",
+			"title": "Greetings",
+			"difficulty": "Easy",
+			"subtitle": "This is the subtitle on Greetings"
+		},
+		{
+			"id": "learning_2_phrases",
+			"title": "Phrases",
+			"difficulty": "Easy",
+			"subtitle": "This is the subtitle on Phrases"
+		},
+		{
+			"id": "learning_3_foods",
+			"title": "Foods",
+			"difficulty": "Easy",
+			"subtitle": "This is the subtitle on Phrases"
+		},
+		{
+			"id": "learning_4_numbers",
+			"title": "Numbers",
+			"difficulty": "Easy",
+			"subtitle": "This is the subtitle on Phrases"
+		},
+		{
+			"id": "learning_5_time",
+			"title": "Time",
+			"difficulty": "Easy",
+			"subtitle": "This is the subtitle on Phrases"
+		}
+]
+}

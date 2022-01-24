@@ -1,9 +1,13 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:lingo_app/screens/home.dart';
 import 'package:lingo_app/styles/styles.dart';
 import '../screens/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
+  static String id = 'splash-screen';
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -13,11 +17,14 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     // Timer starts counting once the app starts...
-    Timer(Duration(seconds: 8), () => {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OnBoardingScreen()))
+    Timer(Duration(seconds: 1), () => {
+      Navigator.pushReplacementNamed(context, OnBoardingScreen.id)
+      // TODO Implement a user auth system to bypass the splash screen to main activity.
     });
-    // TODO Implement a user auth system to bypass the splash screen to main activity.
+
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Container(

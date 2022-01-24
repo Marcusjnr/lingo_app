@@ -1,0 +1,33 @@
+{"challenge_numbers_game": [
+  {
+    "question": "Kedu ihe bụ afọ 36 na ala Igbo",
+    "question_hint_english": "What is 36 in Igbo",
+    "correct_answer": "iri atọ na isii",
+    "incorrect_answers": [
+      "iri atọ na ise",
+      "iri abuọ na isii",
+      "iri atọ na asaa"
+    ]
+  },
+  {
+    "question": "Otu na ndị a bụ nri ndị Igbo",
+    "question_hint_english": "One of these is the food of the Igbo people",
+    "correct_answer": "ụkwa",
+    "incorrect_answers": [
+      "indomie",
+      "achịcha",
+      "raịsị e ghere eghe"
+    ]
+  },
+  {
+    "question": "Good Morning na Bekee pụtara",
+    "question_hint_english": "What is Good morning in Igbo",
+    "correct_answer": "ụtụtụ ọma",
+    "incorrect_answers": [
+      "ị bọọla chi",
+      "o o ezigbo nwa m",
+      "ụtụtụ ọma nke gị"
+    ]
+  }
+]
+}

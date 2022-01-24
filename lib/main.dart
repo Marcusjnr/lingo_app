@@ -1,102 +1,70 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_localized_locales/flutter_localized_locales.dart';
-import 'package:lingo_app/localization/demolocalization.dart';
 import 'package:lingo_app/providers/language_change_provider.dart';
+import 'package:lingo_app/screens/challenge_quiz_page.dart';
+import 'package:lingo_app/screens/forgot_password.dart';
+import 'package:lingo_app/screens/home.dart';
+import 'package:lingo_app/screens/learn_page_quiz.dart';
+import 'package:lingo_app/screens/onboarding_screen.dart';
+import 'package:lingo_app/screens/sign_in_screen.dart';
+import 'package:lingo_app/screens/sign_up_screen.dart';
 import 'package:lingo_app/screens/splash_screen.dart';
 import 'package:lingo_app/styles/styles.dart';
+import 'package:lingo_app/translations/codegen_loader.g.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-import 'localization/local_constant.dart';
 
-void main()async {
+Future<void> main()async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(EasyLocalization(
     child: MyApp(),
     supportedLocales: [
-      const Locale('en', 'UK'), // English, no country code
-      const Locale('ig', 'NG'), // Igbo, no country code
-      const Locale('ha', 'NG'),
-      const Locale('yo', 'NG'),
+      const Locale('de'), // English, no country code
+      const Locale('en'), // Igbo, no country code
+      const Locale('fr'),
+      const Locale('ru'),
     ],
-    path: 'resources/langs',
-    // fallbackLocale: Locale('en', 'US'),
+    path: 'assets/languages',
+    assetLoader: CodegenLoader(),
+    fallbackLocale: Locale('en', 'US'),
     // startLocale: Locale('de', 'DE'),
     saveLocale: true,
-    // useOnlyLangCode: true,
-
-    // optional assetLoader default used is RootBundleAssetLoader which uses flutter's assetloader
-    // install easy_localization_loader for enable custom loaders
-    // assetLoader: RootBundleAssetLoader()
-    // assetLoader: HttpAssetLoader()
-    // assetLoader: FileAssetLoader()
-    // assetLoader: CsvAssetLoader()
-    // assetLoader: YamlAssetLoader() //multiple files
-    // assetLoader: YamlSingleAssetLoader() //single file
-    // assetLoader: XmlAssetLoader() //multiple files
-    // assetLoader: XmlSingleAssetLoader() //single file
-    // assetLoader: CodegenLoader()
   ));
 }
 class MyApp extends StatefulWidget {
   const MyApp({Key key}) : super(key: key);
-  static void setLocale(BuildContext context, Locale locale){
-    _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
-    state.setLocale(locale);
-  }
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale _locale;
-  void setLocale(Locale locale){
-    setState(() {
-      _locale = locale;
-    });
-  }
-  @override
-  void didChangeDependencies() {
-    getLocale().then((locale) {
-      setState(() {
-        this._locale = locale;
-      });
-    });
-    super.didChangeDependencies();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => LanguageChangeProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageChangeProvider()), //Manages the state of the language changed.
       ],
-      child: this._locale == null ?
-        Container(
-        child: Center(
-          child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue[800])),
-        ),
-      )
-   :
-    MaterialApp(
+      child: MaterialApp(
         title: app_name,
-        localizationsDelegates:  context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        theme: appTheme,
-        locale: _locale,
-        localeResolutionCallback: (deviceLocale, supportedLocales){
-          for(var locale in supportedLocales){
-            if(locale.languageCode == deviceLocale.languageCode && locale.countryCode == deviceLocale.countryCode){
-              return deviceLocale;
-            }
-          }
-          return supportedLocales.first;
+        localizationsDelegates: context.localizationDelegates, //Initialize the languages
+        supportedLocales: context.supportedLocales, //List of supported Languages
+        theme: appTheme, //Application Theme
+        initialRoute: SplashScreen.id, //Displays the splash screen first at launch.
+        routes: { //List all the application routes.
+          SplashScreen.id: (context) => SplashScreen(),
+          SignUpScreen.id: (context) => SignUpScreen(),
+          SignInScreen.id: (context) => SignInScreen(),
+          ForgotPassword.id: (context) => ForgotPassword(),
+          OnBoardingScreen.id: (context) => OnBoardingScreen(),
+          HomeScreen.id: (context) => HomeScreen(),
+          ChallengeQuizPage.id: (context) => ChallengeQuizPage(),
         },
-        home: SplashScreen(), //Display the splash screen
-        debugShowCheckedModeBanner: false,
+        locale: context.locale, //Initializes the locale of the user's location
+        home: SplashScreen(), //Display the splash screen, application's starting point.
+        debugShowCheckedModeBanner: false, //Debug Banner Display
       ),
     );
   }
